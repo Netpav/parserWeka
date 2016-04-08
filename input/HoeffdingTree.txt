@@ -1,0 +1,94 @@
+
+Options: -L 2 -S 1 -E 1.0E-7 -H 0.05 -M 0.01 -G 200 -N 0.0 
+
+
+reduce <= 0.751: 
+|   village <= 0.542: 
+|   |   towards <= 0.671: 
+|   |   |   flat <= 0.591: 
+|   |   |   |   unfair <= 0.751: 
+|   |   |   |   |   clothes <= 1.992: 
+|   |   |   |   |   |   behaviour <= 1.542: 
+|   |   |   |   |   |   |   category <= 0.640: 
+|   |   |   |   |   |   |   |   transferred <= 0.771: 1 (2292.000) NB1 NB adaptive1
+|   |   |   |   |   |   |   |   transferred > 0.771: 2 (401.500) NB2 NB adaptive2
+|   |   |   |   |   |   |   category > 0.640: 2 (318.500) NB3 NB adaptive3
+|   |   |   |   |   |   behaviour > 1.542: 2 (428.000) NB4 NB adaptive4
+|   |   |   |   |   clothes > 1.992: 2 (276.500) NB5 NB adaptive5
+|   |   |   |   unfair > 0.751: 2 (447.000) NB6 NB adaptive6
+|   |   |   flat > 0.591: 2 (198.000) NB7 NB adaptive7
+|   |   towards > 0.671: 2 (539.000) NB8 NB adaptive8
+|   village > 0.542: 2 (122.000) NB9 NB adaptive9
+reduce > 0.751: 2 (665.500) NB10 NB adaptive10
+
+Time taken to build model: 55.9 seconds
+Time taken to test model on training data: 5.75 seconds
+
+=== Error on training data ===
+
+Correctly Classified Instances       11895               61.5206 %
+Incorrectly Classified Instances      7440               38.4794 %
+Kappa statistic                          0.0031
+K&B Relative Info Score              70222.7908 %
+K&B Information Score                  675.2943 bits      0.0349 bits/instance
+Class complexity | order 0           18593.2608 bits      0.9616 bits/instance
+Class complexity | scheme            42733.7609 bits      2.2102 bits/instance
+Complexity improvement     (Sf)     -24140.5001 bits     -1.2485 bits/instance
+Mean absolute error                      0.4578
+Root mean squared error                  0.4913
+Relative absolute error                 96.6596 %
+Root relative squared error            100.9546 %
+Coverage of cases (0.95 level)          99.7983 %
+Mean rel. region size (0.95 level)      99.6535 %
+Total Number of Instances            19335     
+
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.998    0.995    0.615      0.998    0.761      0.021    0.503     0.617     1
+                 0.005    0.002    0.561      0.005    0.010      0.021    0.503     0.387     2
+Weighted Avg.    0.615    0.613    0.594      0.615    0.472      0.021    0.503     0.528     
+
+
+=== Confusion Matrix ===
+
+     a     b   <-- classified as
+ 11858    29 |     a = 1
+  7411    37 |     b = 2
+
+
+
+=== Stratified cross-validation ===
+
+Correctly Classified Instances       11887               61.4792 %
+Incorrectly Classified Instances      7448               38.5208 %
+Kappa statistic                          0.0022
+K&B Relative Info Score              60237.4628 %
+K&B Information Score                  579.2622 bits      0.03   bits/instance
+Class complexity | order 0           18593.2613 bits      0.9616 bits/instance
+Class complexity | scheme            46695.5929 bits      2.4151 bits/instance
+Complexity improvement     (Sf)     -28102.3317 bits     -1.4534 bits/instance
+Mean absolute error                      0.4603
+Root mean squared error                  0.4911
+Relative absolute error                 97.1751 %
+Root relative squared error            100.9188 %
+Coverage of cases (0.95 level)          99.7569 %
+Mean rel. region size (0.95 level)      99.7414 %
+Total Number of Instances            19335     
+
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.997    0.995    0.615      0.997    0.761      0.014    0.501     0.615     1
+                 0.005    0.003    0.500      0.005    0.010      0.014    0.501     0.387     2
+Weighted Avg.    0.615    0.613    0.571      0.615    0.471      0.014    0.501     0.527     
+
+
+=== Confusion Matrix ===
+
+     a     b   <-- classified as
+ 11851    36 |     a = 1
+  7412    36 |     b = 2
+

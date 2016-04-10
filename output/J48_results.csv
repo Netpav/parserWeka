@@ -1,0 +1,2 @@
+﻿algo_name;total_instances;total_attributes;train_time;test_time;accuracy;test_instances;tp_rate;fp_rate;precision;recall;f_measure
+﻿25 -M 2;148;540;0.46;0.01;42;50;0.420;0.563;0.434;0.420;0.418

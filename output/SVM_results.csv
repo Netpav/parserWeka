@@ -1,0 +1,2 @@
+﻿algo_name;total_instances;total_attributes;train_time;test_time;accuracy;test_instances;tp_rate;fp_rate;precision;recall;f_measure
+﻿1 -model "C;23614;8936;137.09;21.52;56.3457;8029;0.563;0.539;0.605;0.563;0.431

@@ -1,0 +1,3 @@
+﻿algo_name;total_instances;total_attributes;train_time;test_time;accuracy;test_instances;tp_rate;fp_rate;precision;recall;f_measure
+﻿NaiveBayes;148;540;0.04;0.03;36;50;0.360;0.610;0.369;0.360;0.350
+﻿NaiveBayes;148;540;0.04;0.03;36;50;0.360;0.610;0.369;0.360;0.350

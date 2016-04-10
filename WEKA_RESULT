@@ -1,0 +1,22 @@
+<HEADER> Options: -L 2 -S 1 -E 1.0E-7 -H 1 -M 0.01 -G 1000 -N 0.0 
+
+<TREE DETAILS>
+
+NEAREST <= 0,629: 
+|   ONES <= 0,607: 
+|   |   REPORTED <= 0,629: 
+|   |   |   PROMISED <= 0,617: 1 (1071,000) NB1 NB adaptive1
+|   |   |   PROMISED > 0,617: 2 (180,000) NB2 NB adaptive2
+|   |   REPORTED > 0,629: 2 (189,500) NB3 NB adaptive3
+|   ONES > 0,607: 2 (188,500) NB4 NB adaptive4
+NEAREST > 0,629: 2 (184,000) NB5 NB adaptive5
+
+<TIME>
+
+Time taken to build model: 5.82 seconds
+Time taken to test model on training split: 0.06 seconds
+
+<=== Detailed Accuracy By Class (TEST,TRAIN,CROSSVADATION)=== >
+
+Weighted Avg. -- TP Rate --  FP Rate -- Precision -- Recall -- F-Measure
+

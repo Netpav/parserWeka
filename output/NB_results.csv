@@ -1,2 +1,0 @@
-﻿algo_name;train_time;test_time;accuracy;test_instances;tp_rate;fp_rate;precision;recall;f_measure
-﻿NB;6.08;27.92;65.2222;12761;0.652;0.405;0.647;0.652;0.649

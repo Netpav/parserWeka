@@ -12,6 +12,8 @@ Information about Weight (TP Rate,  FP Rate,  Precision,  Recall ,  F-Measure )
 *4. Total Number of Instances (Train,Test)
 
 ## Usage
+python parse_cli_result.py input/cli/HT.txt
+
 * ` 1. python J48parser.py <input file>`
 * ` 2. ruby parserCSV.rb <input dir>`
 

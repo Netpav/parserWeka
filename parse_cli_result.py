@@ -1,4 +1,5 @@
 import os
+import sys
 from collections import OrderedDict
 
 from src.TextWriter import TextWriter
@@ -37,19 +38,39 @@ def get_accuracy_by_class(line_in):
 
 # CLI PARSING
 
+# RUN: python parse_cli_result.py <full path to file>
+
+# Read argument - input file
+if len(sys.argv) == 1:
+    exit('You must enter full path to input file.')
+path_to_file = sys.argv[1]
+try:
+    input_file = open(path_to_file)
+except IOError:
+    exit('File '+path_to_file+' does not exist or could not be read.')
+
 # Read input file
-algo_name = 'HT'
-filename_in = 'HT'
-input_file = open('input/cli/'+filename_in+'.txt')
+#filename_in = 'HT'
+#input_file = open('input/cli/'+filename_in+'.txt')
 
 # Prepare variables
 data = OrderedDict()
-data['algo_name'] = algo_name
 
-# Get options - only for HT
-if algo_name == 'HT':
-    input_file.readline()
-    data['options'] = input_file.readline().split(':')[1].strip()
+# Find out algorithm name
+input_file.readline()
+name_line = input_file.readline().strip()
+if name_line == 'Naive Bayes Classifier':
+    algo_name = 'NB'
+    data['algo_name'] = algo_name
+elif name_line == 'J48 pruned tree':
+    algo_name = 'J48'
+    data['algo_name'] = algo_name
+elif name_line[0:8] == 'Options:':
+    algo_name = 'HT'
+    data['algo_name'] = algo_name
+    data['options'] = name_line.split(':')[1].strip()
+else:
+    exit('Unsupported algorithm result.')
 
 # Get to the results
 while True:
@@ -76,13 +97,17 @@ skip_lines(input_file, 7)
 data['tp_rate'], data['fp_rate'], data['precision'], data['recall'], data['f_measure'] = \
         get_accuracy_by_class(input_file.readline())
 
-# Only for HT - Stratified cross-validation
-if algo_name == 'HT':
-    skip_lines(input_file, 12)
-    data['cros_accuracy'], data['cros_test_instances'] = get_summary(input_file.readline())
-    skip_lines(input_file, 7)
-    data['cros_tp_rate'], data['cros_fp_rate'], data['cros_precision'], data['cros_recall'], data['cros_f_measure'] = \
-        get_accuracy_by_class(input_file.readline())
+# Is cross-validation used?
+while True:
+    line = input_file.readline()
+    if not line:
+        break
+    if line.strip() == '=== Stratified cross-validation ===':
+        input_file.readline()
+        data['cros_accuracy'], data['cros_test_instances'] = get_summary(input_file.readline())
+        skip_lines(input_file, 7)
+        data['cros_tp_rate'], data['cros_fp_rate'], data['cros_precision'], data['cros_recall'], data['cros_f_measure'] = \
+            get_accuracy_by_class(input_file.readline())
 
 # Close file
 input_file.close()
@@ -94,7 +119,7 @@ text_writer = TextWriter('output')
 header_list = data.keys()
 data_list = data.values()
 
-res_filename = filename_in+'_results'
+res_filename = algo_name+'_results'
 
 # If the results file does not exist, create it and write header to it.
 if not os.path.isfile('output/'+res_filename+'.csv'):

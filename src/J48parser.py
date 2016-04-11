@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
- """ https://github.com/rudi-c/weka-json-parser/blob/master/parsej48.py """
+""" https://github.com/rudi-c/weka-json-parser/blob/master/parsej48.py """
 
 """Parses the output of weka.classifiers.trees.J48
 Modified by Netopa
@@ -49,7 +49,7 @@ import os
 import sys
 
 
-re_head = re.compile("J48 (un)?pruned tree")
+re_head = re.compile("(J48 (un)?pruned tree)|(Options.+)")
 re_divider_line = re.compile("^-*\n$")
 re_blank_line = re.compile("^[ \t\n]*$")
 re_splitter = re.compile("[ :]")
@@ -168,7 +168,7 @@ def main(argv):
 
     tree_lines = get_tree_lines(lines)
     tree = parse_tree(tree_lines)
-	output_filename = input_filename + "tree"
+    output_filename = input_filename + "tree"
     # write json results to output file
     with open(output_filename, 'w') as outfile:
         json.dump(tree, outfile)

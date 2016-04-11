@@ -1,2 +1,4 @@
-﻿algo_name;total_instances;total_attributes;train_time;test_time;accuracy;test_instances;tp_rate;fp_rate;precision;recall;f_measure
-﻿0;148;540;0.16;0.01;44;50;0.440;0.440;0.194;0.440;0.269
+﻿algo_name;options;train_time;test_time;accuracy;test_instances;tp_rate;fp_rate;precision;recall;f_measure;cros_accuracy;cros_test_instances;cros_tp_rate;cros_fp_rate;cros_precision;cros_recall;cros_f_measure
+﻿HT;-L 2 -S 1 -E 1.0E-7 -H 0.05 -M 0.01 -G 200 -N 0.0;55.9;5.75;61.5206;19335;0.615;0.613;0.594;0.615;0.472;61.4792;19335;0.615;0.613;0.571;0.615;0.471
+﻿HT;-L 2 -S 1 -E 1.0E-7 -H 0.05 -M 0.01 -G 200 -N 0.0;55.9;5.75;61.5206;19335;0.615;0.613;0.594;0.615;0.472;61.4792;19335;0.615;0.613;0.571;0.615;0.471
+﻿HT;-L 2 -S 1 -E 1.0E-7 -H 0.05 -M 0.01 -G 200 -N 0.0;55.9;5.75;61.5206;19335;0.615;0.613;0.594;0.615;0.472;61.4792;19335;0.615;0.613;0.571;0.615;0.471

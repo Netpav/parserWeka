@@ -12,7 +12,7 @@ def skip_lines(f_handle, n):
 
 # Read input file
 filename_in = 'NB'
-input_file = open('input/'+filename_in+'.txt')
+input_file = open('input/gui/'+filename_in+'.txt')
 
 # NAIVE BAYES
 

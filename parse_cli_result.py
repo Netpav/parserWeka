@@ -55,10 +55,12 @@ except IOError:
 
 # Prepare variables
 data = OrderedDict()
-
+filename =  os.path.basename(path_to_file).split('.')[0]
 # Find out algorithm name
 input_file.readline()
+
 name_line = input_file.readline().strip()
+data['file_name'] = filename
 if name_line == 'Naive Bayes Classifier':
     algo_name = 'NB'
     data['algo_name'] = algo_name

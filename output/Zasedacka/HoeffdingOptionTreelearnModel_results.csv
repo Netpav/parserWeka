@@ -1,0 +1,11 @@
+﻿file_name;algo_name;model serialized size (bytes);tree size (nodes);tree size (leaves);active learning leaves ;tree depth
+﻿en_10000;HoeffdingOptionTree;-156.0;44;24;24;5
+﻿en_2000;HoeffdingOptionTree;-4.0;1;1;1;0.0
+﻿en_250000;HoeffdingOptionTree;-338.0;96;50;50;10
+﻿en_5000;HoeffdingOptionTree;-72.0;20;12;12;2
+﻿en_50000;HoeffdingOptionTree;-779.0;222;113;113;17
+﻿en_50000_reverb;HoeffdingOptionTree;-338.0;96;50;50;10
+﻿en_50000_text_triple_norm;HoeffdingOptionTree;-324.0;92;48;48;9
+﻿en_50000_text_triple_std;HoeffdingOptionTree;-324.0;92;48;48;9
+﻿en_50000_triple_norm;HoeffdingOptionTree;-331.0;94;49;49;10
+﻿en_50000_triple_std;HoeffdingOptionTree;-331.0;94;49;49;10

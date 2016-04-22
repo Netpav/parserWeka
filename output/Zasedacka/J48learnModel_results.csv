@@ -1,0 +1,11 @@
+﻿file_name;algo_name;model serialized size (bytes)
+﻿en_10000;J48;-1.0
+﻿en_2000;J48;-1.0
+﻿en_250000;J48;-1.0
+﻿en_5000;J48;-1.0
+﻿en_50000;J48;-1.0
+﻿en_50000_reverb;J48;-1.0
+﻿en_50000_text_triple_norm;J48;-1.0
+﻿en_50000_text_triple_std;J48;-1.0
+﻿en_50000_triple_norm;J48;-1.0
+﻿en_50000_triple_std;J48;-1.0

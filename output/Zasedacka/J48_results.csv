@@ -1,0 +1,4 @@
+﻿file_name;algo_name;train_time;test_time;accuracy;test_instances;tp_rate;fp_rate;precision;recall;f_measure
+﻿en_10000;J48;73.99;0.06;92.6263;6591;0.926;0.076;0.927;0.926;0.926
+﻿en_2000;J48;1.37;0.01;91.4068;1315;0.914;0.086;0.915;0.914;0.914
+﻿en_5000;J48;11.98;0.04;91.3479;3294;0.913;0.088;0.915;0.913;0.914

@@ -28,12 +28,6 @@ nameModel = os.path.basename(path_to_file).split('_')[-1]
 name_line = input_file.readline().strip()
 data['file_name'] = filename
 
-# print filename
-# print data
-# print nameAlgo
-# print nameModel
-
-
 if nameAlgo == 'HT':
     algo_name = 'HoeffdingTree'
 elif nameAlgo == 'HTopt':
@@ -65,19 +59,29 @@ data['algo_name'] = algo_name
 # else:
 #     exit('Unsupported algorithm result.')
 
-
-if nameModel == "EvaluateInterleavedTestThenTrain":
-    header_str = 'learning evaluation instances,evaluation time (cpu seconds),model cost (RAM-Hours),classified instances,classifications correct (percent),Kappa Statistic (percent),Kappa Temporal Statistic (percent),Kappa M Statistic (percent),model training instances,model serialized size (bytes),tree size (nodes),tree size (leaves),active learning leaves,tree depth,active leaf byte size estimate,inactive leaf byte size estimate,byte size estimate overhead'
-    header_list = header_str.split(',')
-
+print nameModel
+if nameModel == "learnModel":
     while True:
         line = input_file.readline()
         if not line:
             break
-        line_parts = line.strip().split(',')
-        for a in range(0, len(line_parts)):
-            data[header_list[a]] = line_parts[a]
-    # Close file
+        line_parts = line.split('=')
+
+        # Test tree parts
+        # if line_parts and (line_parts[0].strip() == 'model training instances'):
+        #     data['model training instances'] = line_parts[1].strip().split(' ')[0]
+        if line_parts and (line_parts[0].strip() == 'model serialized size (bytes)'):
+            data['model serialized size (bytes)'] = line_parts[1].strip().split(' ')[0]
+        elif line_parts and (line_parts[0].strip() == 'tree size (nodes)'):
+            data['tree size (nodes)'] = line_parts[1].strip().split(' ')[0]
+        elif line_parts and (line_parts[0].strip() == 'tree size (leaves)'):
+            data['tree size (leaves)'] = line_parts[1].strip().split(' ')[0]
+        elif line_parts and (line_parts[0].strip() == 'active learning leaves'):
+            data['active learning leaves '] = line_parts[1].strip().split(' ')[0]
+        elif line_parts and (line_parts[0].strip() == 'tree depth'):
+            data['tree depth'] = line_parts[1].strip().split(' ')[0]
+
+        # Close file
     input_file.close()
 
     print data
@@ -87,6 +91,7 @@ if nameModel == "EvaluateInterleavedTestThenTrain":
     header_list = data.keys()
     data_list = data.values()
 
+    # Result nameFile
     res_filename = algo_name + '' + nameModel + '_results'
 
     # If the results file does not exist, create it and write header to it.

@@ -5,7 +5,7 @@ from collections import OrderedDict
 from src.TextWriter import TextWriter
 
 # CLI PARSING
-
+#  Modification for LearnModel
 # RUN: python parse_cli_MOA_result.py <full path to file>
 
 # Read argument - input file
@@ -16,7 +16,6 @@ try:
     input_file = open(path_to_file)
 except IOError:
     exit('File ' + path_to_file + ' does not exist or could not be read.')
-
 
 # Prepare variables
 data = OrderedDict()
@@ -34,6 +33,8 @@ elif nameAlgo == 'HTopt':
     algo_name = 'HoeffdingOptionTree'
 elif nameAlgo == 'HTadapt':
     algo_name = 'HoeffdingAdaptiveTree'
+elif nameAlgo == 'adaptHTopt':
+    algo_name = 'AdaptiveHoeffdingOptionTree'
 elif nameAlgo == 'J48':
     algo_name = 'J48'
 else:
@@ -59,14 +60,26 @@ data['algo_name'] = algo_name
 # else:
 #     exit('Unsupported algorithm result.')
 
-print nameModel
-if nameModel == "learnModel":
+if nameAlgo == 'J48':
+    print "J48"
+    while True:
+        line = input_file.readline()
+        if not line:
+            break
+        line_parts = line.split(':')
+        # Train time
+        if line_parts and line_parts[0].strip() == 'Number of Leaves':
+            data['number_of_leaves'] = line_parts[1].strip().split(' ')[0]
+        elif line_parts and (line_parts[0].strip() == 'Size of the tree'):
+            data['size_of_tree'] = line_parts[1].strip().split(' ')[0]
+
+
+else:
     while True:
         line = input_file.readline()
         if not line:
             break
         line_parts = line.split('=')
-
         # Test tree parts
         # if line_parts and (line_parts[0].strip() == 'model training instances'):
         #     data['model training instances'] = line_parts[1].strip().split(' ')[0]
@@ -81,25 +94,24 @@ if nameModel == "learnModel":
         elif line_parts and (line_parts[0].strip() == 'tree depth'):
             data['tree depth'] = line_parts[1].strip().split(' ')[0]
 
-        # Close file
-    input_file.close()
 
-    print data
+ # Close file
+input_file.close()
 
-    # Add data to output file.
-    text_writer = TextWriter('output')
-    header_list = data.keys()
-    data_list = data.values()
+print data
 
-    # Result nameFile
-    res_filename = algo_name + '' + nameModel + '_results'
+# Add data to output file.
+text_writer = TextWriter('output')
+header_list = data.keys()
+data_list = data.values()
 
-    # If the results file does not exist, create it and write header to it.
-    if not os.path.isfile('output/' + res_filename + '.csv'):
-        text_writer.write_file(res_filename, [header_list])
+# Result nameFile
+res_filename = algo_name + '' + nameModel + '_results'
 
-    # Write results.
-    text_writer.write_file(res_filename, [data_list])
+# If the results file does not exist, create it and write header to it.
+if not os.path.isfile('output/' + res_filename + '.csv'):
+    text_writer.write_file(res_filename, [header_list])
 
-else:
-    exit('Unsupported model result.')  # Get to the results
+# Write results.
+text_writer.write_file(res_filename, [data_list])
+

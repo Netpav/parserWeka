@@ -5,7 +5,7 @@ from collections import OrderedDict
 from src.TextWriter import TextWriter
 
 # CLI PARSING
-
+#  Modification for EvaluationTestThenTrainModel
 # RUN: python parse_cli_MOA_result.py <full path to file>
 
 # Read argument - input file
@@ -24,8 +24,9 @@ filename = os.path.basename(path_to_file).split('.')[0]
 nameAlgo = os.path.basename(path_to_file).split('_')[-2]
 nameModel = os.path.basename(path_to_file).split('_')[-1]
 
-# Find out file name + algo name
-name_line = input_file.readline().strip()
+#  split number of documents
+Num = os.path.basename(path_to_file).split('_')[1]
+data['Num'] = Num
 data['file_name'] = filename
 
 # print filename
@@ -40,6 +41,8 @@ elif nameAlgo == 'HTopt':
     algo_name = 'HoeffdingOptionTree'
 elif nameAlgo == 'HTadapt':
     algo_name = 'HoeffdingAdaptiveTree'
+elif nameAlgo == 'adaptHTopt':
+    algo_name = 'AdaptiveHoeffdingOptionTree'
 elif nameAlgo == 'J48':
     algo_name = 'J48'
 else:
@@ -67,20 +70,18 @@ data['algo_name'] = algo_name
 
 
 if nameModel == "EvaluateInterleavedTestThenTrain":
-    header_str = 'learning evaluation instances,evaluation time (cpu seconds),model cost (RAM-Hours),classified instances,classifications correct (percent),Kappa Statistic (percent),Kappa Temporal Statistic (percent),Kappa M Statistic (percent),model training instances,model serialized size (bytes),tree size (nodes),tree size (leaves),active learning leaves,tree depth,active leaf byte size estimate,inactive leaf byte size estimate,byte size estimate overhead'
-    header_list = header_str.split(',')
+    header_list = input_file.readline().split(',')
 
     while True:
         line = input_file.readline()
         if not line:
             break
         line_parts = line.strip().split(',')
-        for a in range(0, len(line_parts)):
+        for a in range(0, len(line_parts),1):
             data[header_list[a]] = line_parts[a]
+    print data
     # Close file
     input_file.close()
-
-    print data
 
     # Add data to output file.
     text_writer = TextWriter('output')

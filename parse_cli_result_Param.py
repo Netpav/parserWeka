@@ -5,7 +5,7 @@ from collections import OrderedDict
 from src.TextWriter import TextWriter
 
 # FUNCTIONS
-
+#  Modification for save param name -G, -H or other
 def skip_lines(f_handle, n):
     for i in range(0, n):
         f_handle.readline()
@@ -23,6 +23,20 @@ def get_summary(line_in):
     test_instances = total_n_of_inst.split(' ')[-1]
 
     return accuracy, test_instances
+
+def get_summary2(line_in):
+    """
+    Process Error on training split -- get accuracy and n. of test instances.
+    :param line_in:
+    :return:
+    """
+    correctly = ' '.join(line_in.strip().split())
+    print  "*************"
+    print correctly
+    accuracy = correctly.split(' ')[-2]
+    skip_lines(input_file, 47)
+
+    return accuracy
 
 def get_accuracy_by_class(line_in):
     """
@@ -56,15 +70,21 @@ except IOError:
 # Prepare variables
 data = OrderedDict()
 filename =  os.path.basename(path_to_file).split('.')[0]
-# parName =  os.path.basename(path_to_file).split('_')[3]
+parName =  os.path.basename(path_to_file).split('_')[3]
 #  split number of documents
 Num = os.path.basename(path_to_file).split('_')[1]
 data['Num'] = Num
+
+# split number of parameter
+parNameNum =  os.path.basename(path_to_file).split('_G')[-1]
+data['parNameNum'] = parNameNum
+
 data['file_name'] = filename
+
 # Find out algorithm name
 input_file.readline()
-
 name_line = input_file.readline().strip()
+
 if name_line == 'Naive Bayes Classifier':
     algo_name = 'NB'
     data['algo_name'] = algo_name
@@ -77,11 +97,10 @@ elif name_line == 'J48 pruned tree':
 elif name_line[0:8] == 'Options:':
     algo_name = 'HT'
     data['algo_name'] = algo_name
+    data['par_name'] = parName
     data['options'] = name_line.split(':')[1].strip()
 else:
     exit('Unsupported algorithm result.')
-
-
 
 # Get to the results
 while True:
@@ -112,7 +131,6 @@ data['tp_rate'], data['fp_rate'], data['precision'], data['recall'], data['f_mea
 skip_lines(input_file,11)
 accuracy_test_line = input_file.readline().strip().split(' ')
 data["accuracy_test"] = accuracy_test_line[-2]
-
 # Is cross-validation used?
 while True:
     line = input_file.readline()
@@ -125,6 +143,13 @@ while True:
         data['cros_tp_rate'], data['cros_fp_rate'], data['cros_precision'], data['cros_recall'], data['cros_f_measure'] = \
             get_accuracy_by_class(input_file.readline())
 
+
+
+# data['accuracy_test'] = get_summary2(input_file.readline())
+
+# data['accuracy_test'] = get_summary(input_file.readline())
+
+
 # Close file
 input_file.close()
 
@@ -135,7 +160,7 @@ text_writer = TextWriter('output')
 header_list = data.keys()
 data_list = data.values()
 
-res_filename = algo_name+'_results'
+res_filename = algo_name+'_results_'+ Num
 
 # If the results file does not exist, create it and write header to it.
 if not os.path.isfile('output/'+res_filename+'.csv'):

@@ -59,41 +59,42 @@ data['algo_name'] = algo_name
 #     data['algo_name'] = algo_name
 # else:
 #     exit('Unsupported algorithm result.')
+if nameModel == "learnModel":
+    if nameAlgo == 'J48':
+        print "J48"
+        while True:
+            line = input_file.readline()
+            if not line:
+                break
+            line_parts = line.split(':')
+            # Train time
+            if line_parts and line_parts[0].strip() == 'Number of Leaves':
+                data['number_of_leaves'] = line_parts[1].strip().split(' ')[0]
+            elif line_parts and (line_parts[0].strip() == 'Size of the tree'):
+                data['size_of_tree'] = line_parts[1].strip().split(' ')[0]
 
-if nameAlgo == 'J48':
-    print "J48"
-    while True:
-        line = input_file.readline()
-        if not line:
-            break
-        line_parts = line.split(':')
-        # Train time
-        if line_parts and line_parts[0].strip() == 'Number of Leaves':
-            data['number_of_leaves'] = line_parts[1].strip().split(' ')[0]
-        elif line_parts and (line_parts[0].strip() == 'Size of the tree'):
-            data['size_of_tree'] = line_parts[1].strip().split(' ')[0]
 
-
+    else:
+        while True:
+            line = input_file.readline()
+            if not line:
+                break
+            line_parts = line.split('=')
+            # Test tree parts
+            # if line_parts and (line_parts[0].strip() == 'model training instances'):
+            #     data['model training instances'] = line_parts[1].strip().split(' ')[0]
+            if line_parts and (line_parts[0].strip() == 'model serialized size (bytes)'):
+                data['model serialized size (bytes)'] = line_parts[1].strip().split(' ')[0]
+            elif line_parts and (line_parts[0].strip() == 'tree size (nodes)'):
+                data['tree size (nodes)'] = line_parts[1].strip().split(' ')[0]
+            elif line_parts and (line_parts[0].strip() == 'tree size (leaves)'):
+                data['tree size (leaves)'] = line_parts[1].strip().split(' ')[0]
+            elif line_parts and (line_parts[0].strip() == 'active learning leaves'):
+                data['active learning leaves '] = line_parts[1].strip().split(' ')[0]
+            elif line_parts and (line_parts[0].strip() == 'tree depth'):
+                data['tree depth'] = line_parts[1].strip().split(' ')[0]
 else:
-    while True:
-        line = input_file.readline()
-        if not line:
-            break
-        line_parts = line.split('=')
-        # Test tree parts
-        # if line_parts and (line_parts[0].strip() == 'model training instances'):
-        #     data['model training instances'] = line_parts[1].strip().split(' ')[0]
-        if line_parts and (line_parts[0].strip() == 'model serialized size (bytes)'):
-            data['model serialized size (bytes)'] = line_parts[1].strip().split(' ')[0]
-        elif line_parts and (line_parts[0].strip() == 'tree size (nodes)'):
-            data['tree size (nodes)'] = line_parts[1].strip().split(' ')[0]
-        elif line_parts and (line_parts[0].strip() == 'tree size (leaves)'):
-            data['tree size (leaves)'] = line_parts[1].strip().split(' ')[0]
-        elif line_parts and (line_parts[0].strip() == 'active learning leaves'):
-            data['active learning leaves '] = line_parts[1].strip().split(' ')[0]
-        elif line_parts and (line_parts[0].strip() == 'tree depth'):
-            data['tree depth'] = line_parts[1].strip().split(' ')[0]
-
+    exit('Unsupported model result.')  # Get to the results
 
  # Close file
 input_file.close()

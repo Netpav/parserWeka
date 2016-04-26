@@ -57,9 +57,8 @@ except IOError:
 data = OrderedDict()
 filename =  os.path.basename(path_to_file).split('.')[0]
 # parName =  os.path.basename(path_to_file).split('_')[3]
-#  split number of documents
-Num = os.path.basename(path_to_file).split('_')[1]
-data['Num'] = Num
+
+print data
 data['file_name'] = filename
 # Find out algorithm name
 input_file.readline()

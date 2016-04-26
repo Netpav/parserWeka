@@ -14,7 +14,8 @@ for name in glob.glob('input/results_TP/*'):
     print name
     print "\n *********** \n"
     # execfile("parse_cli_result.py")
-    os.system('python parse_cli_result.py name')
+    subprocess.call("python parse_cli_result.py " + name, shell=True)
+    # os.system('python parse_cli_result.py name')
     # print "\n *********** \n"
     # parse_cli_result_Param name
     # print "\n *********** \n"

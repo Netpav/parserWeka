@@ -23,6 +23,9 @@ filename = os.path.basename(path_to_file).split('.')[0]
 nameAlgo = os.path.basename(path_to_file).split('_')[-2]
 nameModel = os.path.basename(path_to_file).split('_')[-1]
 
+#  split number of documents
+Num = os.path.basename(path_to_file).split('_')[1]
+data['Num'] = Num
 # Find out file name + algo name
 name_line = input_file.readline().strip()
 data['file_name'] = filename
@@ -80,6 +83,7 @@ if nameModel == "learnModel":
             if not line:
                 break
             line_parts = line.split('=')
+
             # Test tree parts
             # if line_parts and (line_parts[0].strip() == 'model training instances'):
             #     data['model training instances'] = line_parts[1].strip().split(' ')[0]
@@ -93,6 +97,8 @@ if nameModel == "learnModel":
                 data['active learning leaves '] = line_parts[1].strip().split(' ')[0]
             elif line_parts and (line_parts[0].strip() == 'tree depth'):
                 data['tree depth'] = line_parts[1].strip().split(' ')[0]
+            elif line_parts and (line_parts[0].strip() == 'maximum prediction paths used'):
+                data['maximum prediction paths used'] = line_parts[1].strip().split(' ')[0]
 else:
     exit('Unsupported model result.')  # Get to the results
 

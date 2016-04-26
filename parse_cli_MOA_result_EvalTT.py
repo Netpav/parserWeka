@@ -23,11 +23,9 @@ data = OrderedDict()
 filename = os.path.basename(path_to_file).split('.')[0]
 nameAlgo = os.path.basename(path_to_file).split('_')[-2]
 nameModel = os.path.basename(path_to_file).split('_')[-1]
-
 #  split number of documents
-Num = os.path.basename(path_to_file).split('_')[1]
-data['Num'] = Num
-data['file_name'] = filename
+Num = os.path.basename(path_to_file).split('en_')[1]
+data['Name'] = Num
 
 # print filename
 # print data
@@ -69,7 +67,7 @@ data['algo_name'] = algo_name
 #     exit('Unsupported algorithm result.')
 
 
-if nameModel == "EvaluateInterleavedTestThenTrain":
+if nameModel == "EvaluateInterleavedTestThenTrain" or nameModel == "EvaluatePrequential":
     header_list = input_file.readline().split(',')
 
     while True:

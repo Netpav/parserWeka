@@ -133,8 +133,11 @@ data['tp_rate'], data['fp_rate'], data['precision'], data['recall'], data['f_mea
 
 # Error on training split
 skip_lines(input_file,11)
-accuracy_test_line = input_file.readline().strip().split(' ')
-data["accuracy_test"] = accuracy_test_line[-2]
+accuracy_test_line = input_file.readline()
+accuracy_test_line = ' '.join(accuracy_test_line.strip().split())
+accuracy_test_items = accuracy_test_line.split(' ')
+data['accuracy_test'] = accuracy_test_items[-2]
+
 # Is cross-validation used?
 while True:
     line = input_file.readline()
@@ -164,7 +167,7 @@ text_writer = TextWriter('output')
 header_list = data.keys()
 data_list = data.values()
 
-res_filename = algo_name+'_results_'+ Num
+res_filename = algo_name+'_results_' + NumVar
 
 # If the results file does not exist, create it and write header to it.
 if not os.path.isfile('output/'+res_filename+'.csv'):

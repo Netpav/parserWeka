@@ -131,7 +131,7 @@ skip_lines(input_file, 7)
 data['tp_rate'], data['fp_rate'], data['precision'], data['recall'], data['f_measure'] = \
         get_accuracy_by_class(input_file.readline())
 
-# Error on training split
+# Error on test split
 skip_lines(input_file,11)
 accuracy_test_line = input_file.readline()
 accuracy_test_line = ' '.join(accuracy_test_line.strip().split())

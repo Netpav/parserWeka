@@ -80,7 +80,22 @@ elif name_line[0:8] == 'Options:':
 else:
     exit('Unsupported algorithm result.')
 
+if name_line == 'J48 pruned tree':
+    print "J48"
+    while True:
+            r_line = input_file.readline()
+            if not r_line:
+                break
+            r_items = r_line.split(':')
+            print  r_items[-1].strip()
+            if r_items and r_items[0].strip() == 'Number of Leaves':
+                print r_items
+                data['number_of_leaves'] = r_items[1].strip().split('\t')[0]
+            if r_items and r_items[0].strip() == 'Size of the tree':
+                data['size_of_tree'] = r_items[1].strip().split('\t')[0]
+            break
 
+exit()
 
 # Get to the results
 while True:
@@ -107,10 +122,13 @@ skip_lines(input_file, 7)
 data['tp_rate'], data['fp_rate'], data['precision'], data['recall'], data['f_measure'] = \
         get_accuracy_by_class(input_file.readline())
 
-# Error on training split
+
+# Error on test split
 skip_lines(input_file,11)
-accuracy_test_line = input_file.readline().strip().split(' ')
-data["accuracy_test"] = accuracy_test_line[-2]
+accuracy_test_line = input_file.readline()
+accuracy_test_line = ' '.join(accuracy_test_line.strip().split())
+accuracy_test_items = accuracy_test_line.split(' ')
+data['accuracy_test'] = accuracy_test_items[-2]
 
 # Is cross-validation used?
 while True:
